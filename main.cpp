@@ -1,31 +1,39 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 
 using namespace std;
 
-int trocaLetra(string **mensagem, int tamanho, char letraAntes, char letraDepois, string **novaMensagem){
+int trocaLetra(string* mensagem, int tamanho, char letraAntes, char letraDepois, string* novaMensagem){
 
+string valor = *mensagem;
+char valorAtualizado[tamanho];
 int quantidadeTrocas = 0;
 
-cout << mensagem << endl;
-cout << novaMensagem << endl;
-
-
+//Modificando os valores
 
     for(int i=0; i < tamanho; i++) {
-        continue;
+        if(valor[i] == letraAntes) {
+            valorAtualizado[i] = letraDepois;
+        }
+        else {
+            valorAtualizado[i] = valor[i];
+        }
     }
+
+    *novaMensagem = valorAtualizado;
+
 
     return quantidadeTrocas;
 }
 
+
 int main() {
 
-    string mensagemRecebida;
+    string mensagemRecebida = "";
     char letraAntes, letraDepois;
     int tamanhoMensagem, quantidadeTrocas;
-    string* mensagem;
-    string* novaMensagem;
+    string novaMensagem = "";
 
     //Valores a receber
     cout << "Digite uma mensagem: " << endl;
@@ -41,9 +49,10 @@ int main() {
     tamanhoMensagem = mensagemRecebida.length();
 
     //Chamar função para troca de letras
-    quantidadeTrocas = trocaLetra(&mensagem, tamanhoMensagem, letraAntes, letraDepois, &novaMensagem);
+    quantidadeTrocas = trocaLetra(&mensagemRecebida, tamanhoMensagem, letraAntes, letraDepois, &novaMensagem);
     
     cout << "A mensagem original é: " << mensagemRecebida << endl;
-    cout << "A mensagem trocada é: " << *novaMensagem << endl;
+    cout << "A mensagem trocada é: " << novaMensagem << endl;
+    cout << "Quantidade de trocas efetuadas: " << quantidadeTrocas << endl;
+    
 }
-
